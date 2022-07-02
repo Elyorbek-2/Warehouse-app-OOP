@@ -1,12 +1,12 @@
 package entity;
 
+import repository.UserRepository;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class User {
-
-    // bu yo'l yaxshimi yoki serviceda set qilganimizmi? final qiladigan bo'lsak bu to'g'ri kelmaydiku?
-    private  Integer id;
+    private Integer id;
     private String name;
     private String email;
     private String password;
@@ -14,7 +14,6 @@ public class User {
     private Address address;
     private Timestamp createUser;
     private Role role;
-
 
 
     public User() {

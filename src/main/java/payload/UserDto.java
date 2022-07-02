@@ -13,4 +13,9 @@ public class UserDto {
     private String password;
     private String prepassword;
     private Integer addressId;
+
+    public UserDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

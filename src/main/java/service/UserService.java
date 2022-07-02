@@ -1,6 +1,7 @@
 package service;
 
 import entity.Address;
+import entity.BlockUser;
 import entity.Role;
 import entity.User;
 import lombok.AllArgsConstructor;
@@ -10,9 +11,10 @@ import payload.Result;
 import payload.UserDto;
 import repository.UserRepository;
 
-import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Set;
 
@@ -39,6 +41,72 @@ public class UserService {
         long dateTime = date.getTime();
         user.setCreateUser(new Timestamp(dateTime));
         user.setRole(Role.USER);
-        Address address=new Address();
+        // userga addressni davom ettirish kerak
+        return null;
+    }
+
+    public boolean equalsUser(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword()))
+                return true;
+        }
+        return false;
+    }
+    public boolean equalsDirector(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword())&&user.getRole().equals(Role.DIRECTOR))
+                return true;
+        }
+        return false;
+    }
+    public boolean equalsDriver(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword())&&user.getRole().equals(Role.DRIVER))
+                return true;
+        }
+        return false;
+    }
+    public boolean equalsVendor(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword())&&user.getRole().equals(Role.VENDOR))
+                return true;
+        }
+        return false;
+    }
+    public boolean equalsWorker(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword())&&user.getRole().equals(Role.WORKER))
+                return true;
+        }
+        return false;
+    }
+    public boolean equalsUserRole(UserDto userDto) {
+        Set<User> userSet = userRepository.getUserSet();
+        for (User user : userSet) {
+            if (user.getEmail().equals(userDto.getEmail())&&user.getPassword().equals(userDto.getPassword())&&user.getRole().equals(Role.WORKER))
+                return true;
+        }
+        return false;
+    }
+
+    public void blockUser(User user) {
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = start.plus(5, ChronoUnit.HOURS);
+        BlockUser blockUser = new BlockUser(user, start, end, true);
+    }
+
+    public  boolean checkDuration(User user) {
+        //BlockUser blockUser = repository.findByUserId(user.getId());
+        BlockUser blockUser = new BlockUser();
+        return blockUser.getUnblockedDate().isAfter(LocalDateTime.now());
+    }
+
+    public void unblockUser(User user) {
+
     }
 }

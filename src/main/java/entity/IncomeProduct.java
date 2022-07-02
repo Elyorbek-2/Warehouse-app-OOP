@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Address {
+public class IncomeProduct {
     private Integer id;
-    private String home;
-    private String street;
-    private District district;
+    private Product product;
+    private double price;
+    private Timestamp timestamp;
 }

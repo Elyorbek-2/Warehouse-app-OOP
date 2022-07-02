@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.security.PrivateKey;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Address {
-    private Integer id;
-    private String home;
-    private String street;
-    private District district;
+public class Region {
+    private String name;
+    private Country country;
 }
