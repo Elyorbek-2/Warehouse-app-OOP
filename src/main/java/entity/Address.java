@@ -1,2 +1,4 @@
-package entity;public class Address {
+package entity;
+
+public class Address {
 }
